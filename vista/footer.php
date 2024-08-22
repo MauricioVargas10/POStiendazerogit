@@ -6,12 +6,19 @@
     Un sistema de punto de venta
   </div>
   <!-- Default to the left -->
-  <strong>Copyright &copy; 2024 <a href="https://ekesoft.net">EliasCassal </a>.</strong> Derechos reservados
+  <strong>Copyright &copy; 2024 <a href="https://ekesoft.net">Mauricio Vargas </a>.</strong> Derechos reservados
 </footer>
 </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
+
+
+<!-- Incluye jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Incluye jQuery Validate -->
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script>
+
 
 <!-- jQuery -->
 <script src="assest/plugins/jquery/jquery.min.js"></script>
@@ -37,6 +44,7 @@
 
 <script src="assest/js/usuario.js"></script>
 <script src="assest/js/cliente.js"></script>
+
 <!--<script src="assest/js/producto.js"></script>
 <script src="assest/js/factura.js"></script>-->
 

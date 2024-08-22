@@ -1,13 +1,13 @@
-<form action="" id="FRegUsuario">
+<form action="" id="FRegCliente">
   <div class="modal-header bg-primary">
-    <h4 class="modal-title">Registro nuevo usuario</h4>
+    <h4 class="modal-title">Registro nuevo cliente</h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <label for="">Login Usuario</label>
+      <label for="">Login cliente</label>
       <input type="text" class="form-control" name="login" id="login">
     </div>
     <div class="form-group">
@@ -29,15 +29,15 @@
 $(function () {
   $.validator.setDefaults({
     submitHandler: function () {
-      regUsuario()
+      regCliente();
     }
   });
-  
-  $('#FRegUsuario').validate({
+
+  $('#FRegCliente').validate({
     rules: {
       login: {
         required: true,
-        minlength: 3,
+        minlength: 3
       },
       password: {
         required: true,
@@ -45,10 +45,10 @@ $(function () {
       },
       vrPassword: {
         required: true,
-        minlength: 3
-      },
+        minlength: 3,
+        equalTo: "#password" // Asegúrate de que la confirmación de contraseña coincida
+      }
     },
-
     errorElement: 'span',
     errorPlacement: function (error, element) {
       error.addClass('invalid-feedback');
@@ -62,5 +62,25 @@ $(function () {
     }
   });
 });
-</script>
 
+function regCliente() {
+  $.ajax({
+    url: "controlador/clienteControlador.php?ctrRegCliente", // Cambia esto por la URL correcta
+    type: 'POST',
+    data: $('#FRegCliente').serialize(),
+    success: function (response) {
+      if (response === "ok") {
+        alert("Cliente registrado exitosamente");
+        $('#FRegCliente')[0].reset();
+        $("#modal-default").modal("show"); // Cambia '#modalID' por el ID de tu modal
+        // location.reload(); // Opcional: Recarga la página
+      } else {
+        alert("Error al registrar el cliente: " + response);
+      }
+    },
+    error: function () {
+      alert("Hubo un error al procesar la solicitud");
+    }
+  });
+}
+</script>

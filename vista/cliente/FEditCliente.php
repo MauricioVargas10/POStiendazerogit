@@ -9,14 +9,14 @@ $usuario=ControladorUsuario::ctrInfoUsuario($id);
 ?>
 <form action="" id="FEditUsuario">
   <div class="modal-header bg-primary">
-    <h4 class="modal-title">Registro nuevo usuario</h4>
+    <h4 class="modal-title">Registro nuevo cliente</h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <label for="">Login Usuario</label>
+      <label for="">Login cliene</label>
       <input type="text" class="form-control" name="login" id="login" value="<?php echo $usuario["login_usuario"];?>" readonly>
       <input type="hidden" name="idUsuario" value="<?php echo $usuario["id_usuario"];?>">
     </div>

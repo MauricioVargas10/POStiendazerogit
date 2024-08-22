@@ -1,84 +1,64 @@
-
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
-
-    </div><!-- /.container-fluid -->
+    </div>
   </div>
-  <!-- /.content-header -->
-
+  
   <!-- Main content -->
   <div class="content">
     <div class="container-fluid">
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Lista de clientes registrados</h3>
+          <button class="btn btn-primary float-right" onclick="MNuevoCliente()">Nuevo Cliente</button>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
           <table id="example1" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Login</th>
-                <th>Perfil</th>
-                <th>Estado</th>
-                <th>Ultimo acceso</th>
-                <th>Fecha de registro</th>
-                <td>
-                  <button class="btn btn-primary" onclick="MNuevoCliente()">Nuevo</button>
-                </td>
+                <th>ID</th>
+                <th>Razón Social</th>
+                <th>NIT/CI</th>
+                <th>Dirección</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               <?php
-              $cliente=ControladorCliente::ctrInfoClientes();
-              foreach($cliente as $value){
+              $clientes = ControladorCliente::ctrInfoClientes();
+              foreach ($clientes as $value) {
               ?>
-
               <tr>
-                <td><?php echo $value["id_cliente"];?></td>
-                <td><?php echo $value["login_cliente"];?></td>
-                <td><?php echo $value["perfil"];?></td>
-                <td><?php 
-                if($value["estado"]==1){
-                  ?>
-                  <span class="badge badge-success">Activo</span>
-                  <?php
-                }else{
-                  ?>
-                  <span class="badge badge-danger">Inactivo</span>
-                  <?php
-                }
-                  ?></td>
-                <td><?php echo $value["ultimo_login"];?></td>
-                <td><?php echo $value["fecha_registro"];?></td>
+                <td><?php echo $value["id_cliente"]; ?></td>
+                <td><?php echo $value["razon_social_cliente"]; ?></td>
+                <td><?php echo $value["nit_ci_cliente"]; ?></td>
+                <td><?php echo $value["direccion_cliente"]; ?></td>
+                <td><?php echo $value["nombe_cliente"]; ?></td>
+                <td><?php echo $value["telefono_cliente"]; ?></td>
+                <td><?php echo $value["email_cliente"]; ?></td>
                 <td>
                   <div class="btn-group">
-                    <button class="btn btn-secondary" onclick="MEditCliente(<?php echo $value["id_cliente"];?>)">
+                    <button class="btn btn-secondary" onclick="MEditCliente(<?php echo $value['id_cliente']; ?>)">
                       <i class="fas fa-edit"></i>
                     </button>
-                    <button class="btn btn-danger" onclick="MEliCliente(<?php echo $value["id_cliente"];?>)">
+                    <button class="btn btn-danger" onclick="MEliCliente(<?php echo $value['id_cliente']; ?>)">
                       <i class="fas fa-trash"></i>
                     </button>
                   </div>
                 </td>
               </tr>
-
               <?php
               }
               ?>
             </tbody>
-
           </table>
         </div>
-        <!-- /.card-body -->
       </div>
-      <!-- /.card -->
-    </div><!-- /.container-fluid -->
+    </div>
   </div>
-  <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
