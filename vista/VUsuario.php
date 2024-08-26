@@ -28,7 +28,7 @@
                 <th>Ultimo acceso</th>
                 <th>Fecha de registro</th>
                 <td>
-                  <button class="btn btn-primary" onclick="MNuevoUsuario()">Nuevo</button>
+                  <button class="btn btn-primary" style="width: 100%;" onclick="MNuevoUsuario()">Nuevo</button>
                 </td>
               </tr>
             </thead>

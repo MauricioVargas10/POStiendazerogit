@@ -1,51 +1,77 @@
-<form action="" id="FRegUsuario">
-  <div class="modal-header bg-primary">
-    <h4 class="modal-title">Registro nuevo usuario</h4>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="form-group">
-      <label for="">Login Usuario</label>
-      <input type="text" class="form-control" name="login" id="login">
+<form action="" id="FRegProducto">
+    <div class="modal-header bg-primary">
+        <h4 class="modal-title">Ingreso de Producto</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-    <div class="form-group">
-      <label for="">Password</label>
-      <input type="password" class="form-control" name="password" id="password">
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="">Codigo del Producto</label>
+            <input type="text" class="form-control form-control-border" name="codigo" id="codigo">
+        </div>
+        <div class="form-group">
+            <label for="">Nombre del Producto</label>
+            <input type="text" class="form-control form-control-border" name="nombre" id="nombre">
+        </div>
+        <div class="form-group">
+            <label for="">Precio del Producto</label>
+            <input type="number" step="any" class="form-control form-control-border" name="precio" id="precio">
+        </div>
+        <div class="form-group">
+            <label for="">Unidad de Medida</label>
+            <input type="text" class="form-control form-control-border" name="Umedida" id="Umedida">
+        </div>
+        <div class="form-group">
+            <label for="">Imagen</label>
+            <input type="file" class="form-control" name="imagen" id="imagen" onchange="previewImage(event)">      
+            <center><img id="preview" src="#" alt="Vista previa de la imagen" style="display: none; max-width: 150px; margin-top: 20px ;"></center>
+       </div>
+       </div>
+    <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
-    <div class="form-group">
-      <label for="">Repetir password</label>
-      <input type="password" class="form-control" name="vrPassword" id="vrPassword">
-    </div>
-  </div>
-  <div class="modal-footer justify-content-between">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-    <button type="submit" class="btn btn-primary">Guardar</button>
-  </div>
 </form>
 
 <script>
+  
+  function previewImage(event) {
+    var reader = new FileReader();
+    reader.onload = function() {
+      var output = document.getElementById('preview');
+      output.src = reader.result;
+      output.style.display = 'block';
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+  
 $(function () {
   $.validator.setDefaults({
     submitHandler: function () {
-      regUsuario()
+      regProducto(); // Función para manejar el registro del producto
     }
   });
   
-  $('#FRegUsuario').validate({
+
+  $('#FRegProducto').validate({
     rules: {
-      login: {
+      codigo: {
         required: true,
         minlength: 3,
       },
-      password: {
+      nombre: {
         required: true,
-        minlength: 3
+        minlength: 3,
       },
-      vrPassword: {
+      precio: {
         required: true,
-        minlength: 3
+        minlength: 1,
+        //matchPassword: true // Aplica la regla personalizada
+      },
+      Umedida: {
+        required: true,
+        minlength: 3,
       },
     },
 
@@ -59,6 +85,12 @@ $(function () {
     },
     unhighlight: function (element, errorClass, validClass) {
       $(element).removeClass('is-invalid');
+    }
+  });
+  $('#imagen').change(function () {
+    const [file] = this.files;
+    if (file) {
+      $('#preview').attr('src', URL.createObjectURL(file)).show();
     }
   });
 });

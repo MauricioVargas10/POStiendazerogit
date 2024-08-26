@@ -1,83 +1,75 @@
 <?php
+$ruta = parse_url($_SERVER["REQUEST_URI"]);
+
+if (isset($ruta["query"])) {
+  if (
+    $ruta["query"] == "ctrRegCliente" ||
+    $ruta["query"] == "ctrEditCliente" ||
+    $ruta["query"] == "ctrEliCliente"
+  ) {
+    $metodo = $ruta["query"];
+    $cliente = new ControladorCliente();
+    $cliente->$metodo();
+  }
+}
 
 class ControladorCliente
 {
-    /*=============================================
-    REGISTRO DE CLIENTE
-    =============================================*/
-    static public function ctrRegCliente()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["razon_social_cliente"])) {
-            // Sanitización de datos
-            $data = array(
-                "razon_social_cliente" => filter_var($_POST["razon_social_cliente"], FILTER_SANITIZE_STRING),
-                "nit_ci_cliente" => filter_var($_POST["nit_ci_cliente"], FILTER_SANITIZE_STRING),
-                "direccion_cliente" => filter_var($_POST["direccion_cliente"], FILTER_SANITIZE_STRING),
-                "nombre_cliente" => filter_var($_POST["nombre_cliente"], FILTER_SANITIZE_STRING),
-                "telefono_cliente" => filter_var($_POST["telefono_cliente"], FILTER_SANITIZE_STRING),
-                "email_cliente" => filter_var($_POST["email_cliente"], FILTER_SANITIZE_EMAIL)
-            );
+  static public function ctrInfoClientes()
+  {
+    $respuesta = ModeloCliente::mdlInfoClientes();
+    return $respuesta;
+  }
 
-            $respuesta = ModeloCliente::mdlRegCliente($data);
-            echo $respuesta;
-        } else {
-            echo "Método no permitido o datos faltantes";
-        }
-    }
+  static public function ctrRegCliente()
+  {
+    require "../modelo/clienteModelo.php";
 
-    /*=============================================
-    MOSTRAR CLIENTES
-    =============================================*/
-    static public function ctrInfoClientes()
-    {
-        return ModeloCliente::mdlInfoClientes();
-    }
+    $data = array(
+      "razonCliente" => $_POST["rsocial"],
+      "nitCliente" => $_POST["nit"],
+      "direccionCliente" => $_POST["direccion"],
+      "nombreCliente" => $_POST["nombre"],
+      "telefonoCliente" => $_POST["telefono"],
+      "gmailCliente" => $_POST["gmail"]
+    );
 
-    /*=============================================
-    MOSTRAR CLIENTE POR ID
-    =============================================*/
-    static public function ctrInfoCliente($id)
-    {
-        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
-        return ModeloCliente::mdlInfoCliente($id);
-    }
+    $respuesta = ModeloCliente::mdlRegCliente($data);
 
-    /*=============================================
-    EDITAR CLIENTE
-    =============================================*/
-    static public function ctrEditCliente()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["id_cliente"])) {
-            // Sanitización de datos
-            $data = array(
-                "id_cliente" => filter_var($_POST["id_cliente"], FILTER_SANITIZE_NUMBER_INT),
-                "razon_social_cliente" => filter_var($_POST["razon_social_cliente"], FILTER_SANITIZE_STRING),
-                "nit_ci_cliente" => filter_var($_POST["nit_ci_cliente"], FILTER_SANITIZE_STRING),
-                "direccion_cliente" => filter_var($_POST["direccion_cliente"], FILTER_SANITIZE_STRING),
-                "nombre_cliente" => filter_var($_POST["nombre_cliente"], FILTER_SANITIZE_STRING),
-                "telefono_cliente" => filter_var($_POST["telefono_cliente"], FILTER_SANITIZE_STRING),
-                "email_cliente" => filter_var($_POST["email_cliente"], FILTER_SANITIZE_EMAIL)
-            );
+    echo $respuesta;
+  }
 
-            $respuesta = ModeloCliente::mdlEditCliente($data);
-            echo $respuesta;
-        } else {
-            echo "Método no permitido o datos faltantes";
-        }
-    }
+  static public function ctrInfoCliente($id)
+  {
+    $respuesta = ModeloCliente::mdlInfoCliente($id);
+    return $respuesta;
+  }
 
-    /*=============================================
-    ELIMINAR CLIENTE
-    =============================================*/
-    static public function ctrEliCliente()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["id_cliente"])) {
-            $id = filter_var($_POST["id_cliente"], FILTER_SANITIZE_NUMBER_INT);
-            $respuesta = ModeloCliente::mdlEliCliente($id);
-            echo $respuesta;
-        } else {
-            echo "Método no permitido o datos faltantes";
-        }
-    }
+  static function ctrEditCliente(){
+    require "../modelo/clienteModelo.php";
+
+    $data = array(
+      "id" => $_POST["idCliente"],
+      "razonCliente" => $_POST["rsocial"],
+      "nitCliente" => $_POST["nit"],
+      "direccionCliente" => $_POST["direccion"],
+      "nombreCliente" => $_POST["nombre"],
+      "telefonoCliente" => $_POST["telefono"],
+      "gmailCliente" => $_POST["gmail"]
+    );
+
+    ModeloCliente::mdlEditCliente($data);
+    $respuesta = ModeloCliente::mdlEditCliente($data);
+
+    echo $respuesta;
+  }
+
+  static function ctrEliCliente()
+  {
+    require "../modelo/clienteModelo.php";
+    $id = $_POST["id"];
+
+    $respuesta = ModeloCliente::mdlEliCliente($id);
+    echo $respuesta;
+  }
 }
-?>
