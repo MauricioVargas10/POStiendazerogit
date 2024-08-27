@@ -24,9 +24,11 @@ class ControladorProducto{
 
         $data=array(
             "codigoProducto"=>$_POST["codigo"],
+            "codigoProductoSIN"=>$_POST["codigoSIN"],
             "nombreProducto"=>$_POST["nombre"],
             "precioProducto"=>$_POST["precio"],
             "unidadProducto"=>$_POST["Umedida"],
+            "unidadProductoSIN"=>$_POST["UmedidaSIN"],
             "imagenProducto"=>$_FILES["imagen"]["name"],
             "imagen_temp" => $_FILES["imagen"]["tmp_name"]
         );
@@ -38,32 +40,34 @@ class ControladorProducto{
         return $respuesta;
     }
 
-    static function ctrEditProducto()
-    {
+    static function ctrEditProducto(){
         require "../modelo/productoModelo.php";
 
         if ($_FILES["imagen"]["name"] == "") {
             $data = array(
             "id" => $_POST["idProducto"], 
-            "codigoProducto" => $_POST["codigo"], 
+            "codigoProducto" => $_POST["codigo"],
+            "codigoProductoSIN" => $_POST["codigoSIN"],  
             "nombreProducto" => $_POST["nombre"], 
             "precioProducto" => $_POST["precio"], 
-            "unidadProducto" => $_POST["Umedida"], 
+            "unidadProducto" => $_POST["Umedida"],
+            "unidadProductoSIN" => $_POST["UmedidaSIN"], 
             "img" => "null",
             "estado" => $_POST["estado"]
         );
         } else {
             $data = array(
                 "id" => $_POST["idProducto"], 
-                "codigoProducto" => $_POST["codigo"], 
+                "codigoProducto" => $_POST["codigo"],
+                "codigoProductoSIN" => $_POST["codigoSIN"],   
                 "nombreProducto" => $_POST["nombre"], 
                 "precioProducto" => $_POST["precio"], 
-                "unidadProducto" => $_POST["Umedida"], 
+                "unidadProducto" => $_POST["Umedida"],
+                "unidadProductoSIN" => $_POST["UmedidaSIN"], 
                 "imagen" => $_FILES["imagen"]["name"], 
                 "imagen_temp" => $_FILES["imagen"]["tmp_name"], 
                 "estado" => $_POST["estado"]);
         }
-        // var_dump($data);
         ModeloProducto::mdlEditProducto($data);
         $respuesta = ModeloProducto::mdlEditProducto($data);
         echo $respuesta;

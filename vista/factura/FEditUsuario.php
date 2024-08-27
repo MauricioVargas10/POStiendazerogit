@@ -40,13 +40,13 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" type="radio" id="estadoActivo" name="estado" <?php if($usuario['estado'] == "1") echo "checked"; ?> value="1">
+                        <input class="custom-control-input" type="radio" id="estadoActivo" name="estado" <?php if($usuario['estado_usuario'] == "1") echo "checked"; ?> value="1">
                         <label for="estadoActivo" class="custom-control-label">Activo</label>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" type="radio" id="estadoInactivo" name="estado" <?php if($usuario['estado'] == "0") echo "checked"; ?> value="0">
+                        <input class="custom-control-input" type="radio" id="estadoInactivo" name="estado" <?php if($usuario['estado_usuario'] == "0") echo "checked"; ?> value="0">
                         <label for="estadoInactivo" class="custom-control-label">Inactivo</label>
                     </div>
                 </div>

@@ -11,6 +11,10 @@
             <input type="text" class="form-control form-control-border" name="codigo" id="codigo">
         </div>
         <div class="form-group">
+            <label for="">Codigo del Producto SIN</label>
+            <input type="text" class="form-control form-control-border" name="codigoSIN" id="codigoSIN">
+        </div>
+        <div class="form-group">
             <label for="">Nombre del Producto</label>
             <input type="text" class="form-control form-control-border" name="nombre" id="nombre">
         </div>
@@ -21,6 +25,10 @@
         <div class="form-group">
             <label for="">Unidad de Medida</label>
             <input type="text" class="form-control form-control-border" name="Umedida" id="Umedida">
+        </div>
+        <div class="form-group">
+            <label for="">Unidad de Medida SIN</label>
+            <input type="text" class="form-control form-control-border" name="UmedidaSIN" id="UmedidaSIN">
         </div>
         <div class="form-group">
             <label for="">Imagen</label>
@@ -95,4 +103,3 @@ $(function () {
   });
 });
 </script>
-

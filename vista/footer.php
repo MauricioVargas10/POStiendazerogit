@@ -1,24 +1,16 @@
-
-<!-- Main Footer -->
-<footer class="main-footer">
-  <!-- To the right -->
-  <div class="float-right d-none d-sm-inline">
-    Un sistema de punto de venta
-  </div>
-  <!-- Default to the left -->
-  <strong>Copyright &copy; 2024 <a href="https://ekesoft.net">Mauricio Vargas </a>.</strong> Derechos reservados
-</footer>
+ <!-- Main Footer -->
+ <footer class="main-footer">
+    <!-- To the right -->
+    <div class="float-right d-none d-sm-inline">
+      Un sistema de punto de venta
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+  </footer>
 </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
-
-<!-- Incluye jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Incluye jQuery Validate -->
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script>
-
 
 <!-- jQuery -->
 <script src="assest/plugins/jquery/jquery.min.js"></script>
@@ -45,39 +37,33 @@
 <script src="assest/js/usuario.js"></script>
 <script src="assest/js/cliente.js"></script>
 <script src="assest/js/producto.js"></script>
-<!--<script src="assest/js/factura.js"></script> -->
+<script src="assest/js/factura.js"></script> 
 
-
-<!--<script src="assest/js/producto.js"></script>
-<script src="assest/js/factura.js"></script>-->
-
-<!--===============
-seccion de modals
-=================-->
-<div class="modal fade" id="modal-default">
-  <div class="modal-dialog">
-    <div class="modal-content" id="content-default">
-
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
+<div class="modal fade" id="modal-warning">
+        <div class="modal-dialog">
+          <div class="modal-content " id="content-warning">
+            
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
 
 <!-- jquery-validation -->
 <script src="assest/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="assest/plugins/jquery-validation/additional-methods.min.js"></script>
 <script src="assest/plugins/jquery-validation/localization/messages_es.js"></script>
 
+
+</body>
 <script>
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
   });
 </script>
-</body>
 </html>

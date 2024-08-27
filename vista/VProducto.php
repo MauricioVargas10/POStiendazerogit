@@ -1,5 +1,6 @@
- <!-- Content Wrapper. Contains page content -->
- <div class="content-wrapper">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -23,9 +24,8 @@
                   <tr>
                     <th>ID</th>
                     <th>Codigo</th>
-                    <th>Nombre</th>
+                    <th>Descripcion</th>
                     <th>Precio</th>
-                    <th>Unidad</th>
                     <th>Imagen</th>
                     <th>Disponible</th>
                     <td>
@@ -43,9 +43,10 @@
                     <tr>
                         <td><?php echo $value["id_producto"];?></td>
                         <td><?php echo $value["cod_producto"];?></td>
+                        
                         <td><?php echo $value["nombre_producto"];?></td>
                         <td><?php echo $value["precio_producto"];?></td>
-                        <td><?php echo $value["unidad_medida"];?></td>
+                     
                         <td> <img src="<?php echo $value["imagen_producto"];?>" width=150px height=auto "></td>
                         <td><?php 
                             if ($value["disponible"]=="1") {
@@ -61,6 +62,9 @@
 
                         <td>
                             <div class="btn-group" style="width: 100%;">
+                                <button class="btn btn-info"  style="width: 50%;" onclick="MVerProducto(<?php echo $value["id_producto"];?>)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                                 <button class="btn btn-secondary"  style="width: 50%;" onclick="MEditProducto(<?php echo $value["id_producto"];?>)">
                                     <i class="fas fa-edit"></i>
                                 </button>
@@ -88,3 +92,4 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+

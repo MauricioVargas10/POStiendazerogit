@@ -30,7 +30,7 @@
                     <th>Gmial</th>
 
                     <td>
-                        <button class="btn btn-primary" style="width: 100%;" onclick="MNuevoCliente()">Nuevo</button>
+                        <button class="btn btn-warning" style="width: 100%;" onclick="MNuevoCliente()">Nuevo</button>
                     </td>
                   </tr>
                 </thead>
@@ -80,3 +80,4 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+

@@ -20,6 +20,10 @@
             <input type="hidden" name="idProducto" value="<?php echo $producto['id_producto']; ?>">
         </div>
         <div class="form-group">
+            <label for="codigo">Codigo Producto SIN</label>
+            <input type="text" class="form-control" name="codigoSIN" id="codigoSIN" value="<?php echo $producto['cod_producto_sin']; ?>" >
+        </div>
+        <div class="form-group">
             <label for="nombre">Nombre del Producto</label>
             <input type="text" class="form-control" name="nombre" id="nombre" value="<?php echo $producto['nombre_producto']; ?>">
         </div>
@@ -30,6 +34,10 @@
         <div class="form-group">
             <label for="">Unidad de Medida</label>
             <input type="text" class="form-control form-control-border" name="Umedida" id="Umedida" value="<?php echo $producto['unidad_medida']; ?>">
+        </div>
+        <div class="form-group">
+            <label for="">Unidad de Medida SIN</label>
+            <input type="text" class="form-control form-control-border" name="UmedidaSIN" id="UmedidaSIN" value="<?php echo $producto['unidad_medida_sin']; ?>">
         </div>
         <div class="form-group">
             <label for="">Imagen</label>
@@ -111,4 +119,3 @@ $(function () {
 
 });
 </script>
-
