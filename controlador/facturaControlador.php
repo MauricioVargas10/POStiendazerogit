@@ -4,7 +4,8 @@
 
     if(isset($ruta["query"])){
         if($ruta["query"]=="ctrRegFactura" || 
-            $ruta["query"]=="ctrEditFactura"|| 
+            $ruta["query"]=="ctrEditFactura"||
+            $ruta["query"]=="ctrNumFactura"||  
             $ruta["query"]=="ctrEliFactura"){
             $metodo=$ruta["query"];
             $factura=new ControladorFactura();
@@ -63,5 +64,16 @@ class ControladorFactura{
       //  ModeloFactura::mdlEliFactura($id);
         $respuesta=ModeloFactura::mdlEliFactura($id);
         echo $respuesta;
+    }
+    static public function ctrNumFactura(){
+        require "../modelo/facturaModelo.php";
+
+        $respuesta=ModeloFactura::mdlNumFactura();
+
+        if($respuesta["max(id_factura)"]==null){
+            echo "1";
+        }else{
+            echo $respuesta["max(id_factura)"]+1;
+        }
     }
 }

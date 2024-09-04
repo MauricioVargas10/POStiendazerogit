@@ -111,4 +111,15 @@ class ModeloProducto{
         $stmt->closeCursor();
         $stmt-->null;
     }
+
+    static public function mdlBusProducto($cod){
+
+        $stmt=Conexion::conectar()->prepare("select * from producto where cod_producto='$cod'");
+        $stmt->execute();
+
+        return $stmt->fetch();
+    
+        $stmt->close();
+        $stmt->null;
+    }
 }   
