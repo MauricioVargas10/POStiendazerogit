@@ -29,7 +29,7 @@
                     <th>Imagen</th>
                     <th>Disponible</th>
                     <td>
-                        <button class="btn btn-warning" style="width: 100%;" onclick="MNuevoProducto()">Nuevo</button>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="MNuevoProducto()">Nuevo</button>
                     </td>
                   </tr>
                 </thead>
@@ -49,6 +49,7 @@
                      
                         <td> <img src="<?php echo $value["imagen_producto"];?>" width=150px height=auto "></td>
                         <td><?php 
+                        
                             if ($value["disponible"]=="1") {
                               ?>
                               <span class="badge badge-success">Disponible</span>

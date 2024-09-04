@@ -54,7 +54,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-user-tie"></i>
               <p>
                 Usuarios
                 <i class="right fas fa-angle-left"></i>
@@ -115,7 +115,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-receipt"></i>
+              <i class="nav-icon fas fa-cart-plus"></i>
               <p>
                 Ventas
                 <i class="right fas fa-angle-left"></i>
@@ -124,7 +124,7 @@
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                <a href="VUsuario" class="nav-link">
+                <a href="FormVenta" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Emitir Factura</p>
                 </a>
