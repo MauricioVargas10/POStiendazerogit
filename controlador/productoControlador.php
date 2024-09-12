@@ -84,10 +84,11 @@ class ControladorProducto{
     }
 
     static public function ctrBusProducto(){
+        
         require "../modelo/productoModelo.php";
 
         $codProducto=$_POST["codProducto"];
         $respuesta=ModeloProducto::mdlBusProducto($codProducto);
-        echo json_encode($respuesta);
-    }
+        echo json_encode($respuesta);   
+    }  
 }

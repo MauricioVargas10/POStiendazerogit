@@ -128,7 +128,7 @@
         <div class="card-footer">
             <button class="btn btn-success" onclick="emitirFactrura()">Guardar</button>
         </div>
-
+</div>
 
 
         <!-- carrito -->
@@ -151,10 +151,14 @@
                     <label for="">Cod. Producto</label>
                     <div class="input-group form-group">
                         <input type="text" class="form-control" name="codProducto" id="codProducto" list="listaProductos">
-                        <button class="btn btn-outline-secondary" type="button" oncliclk="busProducto()">
+                        <input type="hidden" id="codProductoSin" name="codProductoSin">
+                        <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="busProducto()">
                             <i class="fas fa-search"></i>
                  </div>
             </div>
+            </div>
+            
 
 
 
@@ -184,7 +188,8 @@
               <div class="form-group-col-md-1">
                 <label for="">Cantidad</label>
                 <div class="input-group form-group">
-                    <input type="text" class="form-control" name="cantProducto" id="cantProducto" value="0" onkeyup="calcularPreProd()">
+                    <input type="text" class="form-control" name="cantProducto" id="cantProducto" value="0" 
+                    onkeyup="calcularPreProd()">
                 </div>
               </div>
 
@@ -193,6 +198,7 @@
                 <label for="">U. Medida</label>
                 <div class="input-group form-group">
                     <input type="text" class="form-control" name="uniMedida" id="uniMedida">
+                    <input type="hidden" id="uniMedidaSin" name="uniMedidaSin">
                 </div>
               </div>
 
@@ -207,7 +213,7 @@
               <div class="form-group-col-md-1">
                 <label for="">Descuento</label>
                 <div class="input-group form-group">
-                    <input type="text" class="form-control" name="descProducto" id="desProducto" value="0" 
+                    <input type="text" class="form-control" name="descProducto" id="descProducto" value="0.00" 
                     onkeyup="calcularPreProd()">
                 </div>
               </div>
@@ -222,19 +228,32 @@
               <div class="form-group-col-md-1">
                 <label for="">&nbsp;</label>
                 <div class="input-group form-group">
-                    <button class="btn btn-info btn-circle form-control">
+                    <button class="btn btn-info btn-circle form-control" onclick="agregarCarrito()">
                         <i class="fas fa-plus"></i>
                     </button>
+                 </div>
                 </div>
               </div>
-              </div>
             </div>
-          
-        <div class="card-footer">
         </div>
-
-      </div>
-   </div>
+        <div class="card-footer">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <td>Descripcion</td>
+                    <td>Cantidad</td>
+                    <td>P. Unitario</td>
+                    <td>Descuento</td>
+                    <td>P. Total</td>
+                    <td>&nbsp;</td>
+                    </tr>
+                </thead>
+                <tbody id="listaDetalle"></tbody>
+            </table>
+        </div>
+  </div>
+ </div>
+ </div>
     <!-- /.content -->
 </div>
   <!-- /.content-wrapper -->
