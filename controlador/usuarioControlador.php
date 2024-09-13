@@ -23,7 +23,7 @@ class ControladorUsuario{
         // var_dump($resultado);
         if ($resultado["login_usuario"]==$usuario && $resultado["password"]==$password && $resultado["estado"]==1) {
             
-            $_SESSION["ingreso"]=$resultado["login_usuario"];
+            $_SESSION["login"]=$resultado["login_usuario"];
             $_SESSION["perfil"]=$resultado["perfil"];
             $_SESSION["idUsuario"]=$resultado["id_usuario"];
             $_SESSION["ingreso"]="ok";
