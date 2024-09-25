@@ -52,6 +52,7 @@
                         <label for="">NIT/CI</label>
                         <div class="input-group">
                        <input type="text" class="form-control" list="listaClientes" name="nitCliente" id="nitCliente"> 
+                       <input type="hidden" id="idCliente" name="idCliente">
                        <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="button" onclick="busCliente()">
                             <i class="fas fa-search"></i> 
@@ -122,12 +123,17 @@
                         </select>
                       </div>
                   </div>
+
+                  <!-- panel de avisos -->
+                   <div class ="callout callout-info direct-chat-messanges" style="height:100px; width:290px">
+                    <span class="list-unstyled" id="panelInfo"></span>
+                   </div>
                 </div>
             </div>
             </div>
         </div>
         <div class="card-footer">
-            <button class="btn btn-success" onclick="emitirFactrura()">Guardar</button>
+            <button class="btn btn-success" onclick="emitirFactura()">Guardar</button>
         </div>
 </div>
 
@@ -258,3 +264,12 @@
     <!-- /.content -->
 </div>
   <!-- /.content-wrapper -->
+  <script>
+    setTimeout(()=>{
+        extraerLeyenda();
+    }, 4000)
+
+    setTimeout(()=>{
+        verificarVigenciaCufd();
+    }, 4000)
+</script>

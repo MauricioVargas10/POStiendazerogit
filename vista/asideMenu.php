@@ -43,6 +43,7 @@
         </div>
         <div class="info">
           <a href="#" class="d-block" id="usuarioLogin" ><?php echo $_SESSION["login"];?></a>
+          <input type="hidden" id="idUsuario" value="<?php echo $_SESSION["idUsuario"];?>"> 
         </div>
       </div>
 
@@ -74,7 +75,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                clientes
+                Clientes
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>

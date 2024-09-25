@@ -1,5 +1,5 @@
 
-
+///////*variables globales*///////
 
 var host = "http://localhost:5000/";
 var codSistema="775FA42BE90F7B78EF98F57"
@@ -65,6 +65,7 @@ function busCliente(){
             }
 
             document.getElementById("rsCliente").value=data["razon_social_cliente"]
+            document.getElementById("idCliente").value=data["id_cliente"]
             numFactura()
         }
     })
@@ -313,6 +314,19 @@ function verificarVigenciaCufd(){
     })
 }
 
+//////////**transformar fecha de formato de iso*///////////
+function transformarFecha(fechaISO){
+    let fecha_iso=fechaISO.split("T")
+    let hora_iso=fecha_iso[1].split(".")
+  
+    let fecha=fecha_iso[0]
+    let hora=hora_iso[0]
+  
+    let fecha_hora=fecha+" "+hora
+    return fecha_hora
+  }
+  
+
 /*===============
 Validar Formulario
 ================*/
@@ -323,12 +337,16 @@ function validarFormulario(){
     let rsCliente=document.getElementById("rsCliente").value
 
     if(numFactura === null || numFactura.length === 0){
+        $("#panelInfo").before("<span class='text-danger'>DEBE LLENAR LOS CAMPOS FALTANTES</span><br>");
         return false
     }else if(nitCliente === null || nitCliente.length === 0){
+        $("#panelInfo").before("<span class='text-danger'>DEBE LLENAR LOS CAMPOS FALTANTES</span><br>");
         return false
     }else if(emailCliente === null || emailCliente.length === 0){
+        $("#panelInfo").before("<span class='text-danger'>DEBE LLENAR LOS CAMPOS FALTANTES</span><br>");
         return false
     }else if(rsCliente === null || rsCliente.length === 0){
+        $("#panelInfo").before("<span class='text-danger'>DEBE LLENAR LOS CAMPOS FALTANTES</span><br>");
         return false
     }
 
@@ -370,7 +388,6 @@ function emitirFactura(){
     let descAdicional=parseFloat(document.getElementById("descAdicional").value)
     let subTotal=parseInt(document.getElementById("subTotal").value)
     let usuarioLogin=document.getElementById("usuarioLogin").value
-
     let actEconomica=document.getElementById("actEconomica").value
     let emailCliente=document.getElementById("emailCliente").value
 
@@ -436,14 +453,179 @@ function emitirFactura(){
         data:JSON.stringify(obj),
         cache:false,
         contentType:"application/json",
-        //processData:false,
+        processData:false,
         success:function(data){
-            console.log(data)
+            if(data["codigoResultado"]!=908){
+                $("#panelInfo").before("<span class='text-danger'>ERROR, FACTURA NO EMITIDA</span><br>")
+              }else{
+                $("#panelInfo").before("<span>REGISTRANDO FACTURA...</span><br>")
+                let datos={
+                  codigoResultado:data["codigoResultado"],
+                  codigoRecepcion:data["datoAdicional"]["codigoRecepcion"],
+                  cuf:data["datoAdicional"]["cuf"],
+                  sentDate:data["datoAdicional"]["sentDate"],
+                  xml:data["datoAdicional"]["xml"],
+                }
+                registrarFactura(datos);
+              }
+            }
+          })
         }
-    })
-
-
-  }else{
-    $("#panelInfo").before("<span class='text-danger'>Asegurese de llenar todos los campos!!!</span><br>")
-  }
-}
+        }
+        
+        /**registrar factura */
+        function registrarFactura(datos){
+          let numFactura=document.getElementById("numFactura").value
+          let idCliente=document.getElementById("idCliente").value
+          let subTotal=parseFloat(document.getElementById("subTotal").value)
+          let descAdicional=parseFloat(document.getElementById("descAdicional").value)
+          let totApagar=parseFloat(document.getElementById("totApagar").value)
+          let fechaEmision=transformarFecha(datos["sentDate"])
+          let idUsuario=document.getElementById("idUsuario").value
+          let usuarioLogin=document.getElementById("usuarioLogin").innerHTML
+          let obj={
+            "codFactura":numFactura,
+            "idCliente":idCliente,
+            "detalle":JSON.stringify(arregloCarrito),
+            "neto":subTotal,
+            "descuento":descAdicional,
+            "total":totApagar,
+            "fechaEmision":fechaEmision,
+            "cufd":cufd,
+            "cuf":datos["cuf"],
+            "xml":datos["xml"],
+            "idUsuario":idUsuario,
+            "usuario":usuarioLogin,
+            "leyenda":leyenda,
+          }
+          /* console.log(JSON.stringify(obj)) */
+          $.ajax({
+            type:"POST",
+            url:"controlador/facturaControlador.php?ctrRegistrarFactura",
+            data:obj,
+            cache:false,
+            success:function(data){
+              if(data="ok"){
+                Swal.fire({
+                  icon:"success",
+                  showConfirmButton:false,
+                  title:"Factura Registrada",
+                  timer:1000
+                })
+                setTimeout(function(){
+                  location.reload()
+                }, 1000)
+              }else{
+                Swal.fire({
+                  icon:"error",
+                  showConfirmButton:false,
+                  title:"ERROR DE REGISTRO",
+                  timer:1500
+                })
+              }
+            }
+          })
+        }
+        
+        
+        /**ver factura */
+        function MVerFactura(id){
+          $("#modal-xl").modal("show");
+           
+          var obj="";
+          $.ajax({
+         
+             type:"POST",
+             url:"vista/factura/MVerFactura.php?id="+id,
+             data: obj,
+             success: function(data) {
+                 $("#content-xl").html(data);
+             }
+          })
+        }
+        
+        /**eliminar factura */
+        function MEliFactura(cuf){
+          let obj={
+            codigoAmbiente:2,
+            codigoPuntoVenta:0,
+            codigoPuntoVentaSpecified:true,
+            codigoSistema:codSistema,
+            codigoSucursal:0,
+            nit:nitEmpresa,
+            codigoDocumentoSector:1,
+            codigoEmision:1,
+            codigoModalidad:2,
+            cufd:cufd,
+            cuis:cuis,
+            tipoFacturaDocumento:1,
+            codigoMotivo:1,
+            cuf:cuf
+          }
+        
+        
+          Swal.fire({
+            title:"¿Está seguro de anular esta factura?",
+            showDenyButton:true,
+            showCancelButton:false,
+            confirmButtonText:'Confirmar',
+            denyButtonText:'Cancelar'
+        }).then((result)=>{
+            if(result.isConfirmed){
+                $.ajax({
+                    type:"POST",
+                    url:host+"api/CompraVenta/anulacion",
+                    data:JSON.stringify(obj),
+                    cache:false,
+                    contentType:"application/json",
+                    processData:false,
+                    success: function(data) {
+                      if(data["codigoEstado"]==905){
+                        anularFactura(cuf)
+                      }
+                      else{
+                        Swal.fire({
+                          icon:'error',
+                          title:"ERROR",
+                          text:"Anulación rechazada",
+                          showConfirmButton:false,
+                          timer:1000
+                      })
+                      }
+                    }
+                })
+            }
+        })
+        }
+        
+        function anularFactura(cuf){
+          let obj={
+            cuf:cuf
+          }
+          $.ajax({
+            type:"POST",
+            url:"controlador/facturaControlador.php?ctrAnularFactura",
+            data:obj,
+            success: function(data) {
+              if(data=="ok"){
+                Swal.fire({
+                  icon:'success',
+                  title:"Factura Anulada ",
+                  showConfirmButton:false,
+                  timer:1000
+              })
+              setTimeout(function(){
+                location.reload()
+              },1200)
+              }else{
+                Swal.fire({
+                  icon:'error',
+                  title:"ERROR",
+                  text:"Error al anular",
+                  showConfirmButton:false,
+                  timer:1000
+              })
+              }
+            }
+        })
+        }
