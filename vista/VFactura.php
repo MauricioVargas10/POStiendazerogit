@@ -45,38 +45,41 @@
                   <td><?php echo $value["total"]; ?></td>
                   <td><?php
                       if ($value["estado_factura"] == 1) {
+                        ?>
+                        <span class="badge badge-success">Emitido</span>
+                      <?php
+                        } else {
                       ?>
-                      <span class="badge badge-success">Emitido</span>
-                    <?php
-                      } else {
-                    ?>
-                      <span class="badge badge-danger">Anulada</span>
-                    <?php
-                      } ?>
-                  </td>
-                  <td>
-                    <div class="btn-group">
-                      <button class="btn btn-info" onclick="MVerFactura(<?php echo $value["id_factura"]; ?>)">
-                        <i class="fas fa-eye"></i>
-                      </button>
-                      <button class="btn btn-danger" onclick="MEliFactura('<?php echo $value["cuf"]; ?>')">
-                        <i class="fas fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              <?php
-              }
-              ?>
-            </tbody>
-
-          </table>
+                        <span class="badge badge-danger">Anulada</span>
+                      <?php
+                        } ?>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <button class="btn btn-info" onclick="MVerFactura(<?php echo $value["id_factura"]; ?>)">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-danger" onclick="MEliminarFactura('<?php echo $value["cuf"]; ?>')">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                        <a href="vista/factura/ImpFactura.php?id=<?php echo $value["id_factura"]; ?>" class="btn btn-success" target="_blank" style="font: awesome;">
+                          <i class="fas fa-print"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                <?php
+                }
+                ?>
+              </tbody>
+  
+            </table>
+          </div>
+          <!-- /.card-body -->
         </div>
-        <!-- /.card-body -->
+  
+        </div><!-- /.container-fluid -->
       </div>
-
-      </div><!-- /.container-fluid -->
+      <!-- /.content -->
     </div>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+    <!-- /.content-wrapper -->

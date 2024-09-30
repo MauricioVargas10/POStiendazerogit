@@ -1,10 +1,9 @@
 
 ///////*variables globales*///////
-
-var host = "http://localhost:5000/";
+var host ="http://localhost:5000/"
 var codSistema="775FA42BE90F7B78EF98F57"
 var cuis="9272DC05"
-var nitEmpresa=338794023
+var nitEmpresa=338794023;
 var
 token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTdXBlcmppY2hvMzMiLCJjb2RpZ29TaXN0ZW1hIjoiNzc1RkE0MkJFOTBGN0I3OEVGOThGNTciLCJuaXQiOiJINHNJQUFBQUFBQUFBRE0ydGpDM05ERXdNZ1lBOFFXMzNRa0FBQUE9IiwiaWQiOjYxODYwOCwiZXhwIjoxNzMzOTYxNjAwLCJpYXQiOjE3MDI0OTc2NjAsIm5pdERlbGVnYWRvIjozMzg3OTQwMjMsInN1YnNpc3RlbWEiOiJTRkUifQ.4K_pQUXnIhgI5ymmXoyL43i0pSk3uKCgLMkmQeyl67h7j55GSRsH120AD44pR0aQ1UX_FNYzWQBYrX6pWLd-1w"
 var rsEmpresa="NEOMAC SRL"
@@ -117,9 +116,9 @@ function calcularPreProd(){
     let descProducto=parseFloat(document.getElementById("descProducto").value)
     let preUnit=parseFloat(document.getElementById("preUnitario").value)
 
-    let preProducto=preUnit-descProducto
+    let preProducto=(preUnit*cantPro)-descProducto
     
-    document.getElementById("preTotal").value=preProducto*cantPro
+    document.getElementById("preTotal").value=preProducto
 } 
 
 /////////Carrito////////
@@ -299,7 +298,8 @@ function verificarVigenciaCufd(){
             //fecha del ultimo cufd de mi db
             let vigCufdActual=new Date(data["fecha_vigencia"])
             //console.log(vigCufdActual)
-            if(date.getTime()>vigCufdActual.getTime()){
+
+            if (date.getTime() > vigCufdActual.getTime() || data == false) {
                 $("#panelInfo").before("<span class='text-warning'>Cufd caducado!!!</span><br>")
                 $("#panelInfo").before("<span>Registrando Cufd</span><br>")
                 registrarNuevoCufd()
@@ -376,7 +376,7 @@ Emitir factura
 
 function emitirFactura(){
 
-    if(validarFormulario()===true){
+    if(validarFormulario()==true){
     let date=new Date()
     let numFactura=parseInt(document.getElementById("numFactura").value)
     let fechaFactura=date.toISOString()
@@ -387,7 +387,8 @@ function emitirFactura(){
     let totApagar=parseInt(document.getElementById("totApagar").value)
     let descAdicional=parseFloat(document.getElementById("descAdicional").value)
     let subTotal=parseInt(document.getElementById("subTotal").value)
-    let usuarioLogin=document.getElementById("usuarioLogin").value
+    let usuarioLogin=document.getElementById("usuarioLogin").innerHTML
+
     let actEconomica=document.getElementById("actEconomica").value
     let emailCliente=document.getElementById("emailCliente").value
 
@@ -445,7 +446,7 @@ function emitirFactura(){
         }
     }
 
-    console.log(JSON.stringify(obj))
+    /* console.log(JSON.stringify(obj)) */
 
     $.ajax({
         type:"POST",
@@ -455,6 +456,7 @@ function emitirFactura(){
         contentType:"application/json",
         processData:false,
         success:function(data){
+            /* console.log(data); */
             if(data["codigoResultado"]!=908){
                 $("#panelInfo").before("<span class='text-danger'>ERROR, FACTURA NO EMITIDA</span><br>")
               }else{
@@ -466,10 +468,12 @@ function emitirFactura(){
                   sentDate:data["datoAdicional"]["sentDate"],
                   xml:data["datoAdicional"]["xml"],
                 }
-                registrarFactura(datos);
+                registrarFactura(datos)
               }
             }
           })
+        }else{
+            $("#panelInfo").before("<span class='text-danger'>Asegurese de llenar todos los campos!!!</span><br>")
         }
         }
         
@@ -483,6 +487,7 @@ function emitirFactura(){
           let fechaEmision=transformarFecha(datos["sentDate"])
           let idUsuario=document.getElementById("idUsuario").value
           let usuarioLogin=document.getElementById("usuarioLogin").innerHTML
+
           let obj={
             "codFactura":numFactura,
             "idCliente":idCliente,
@@ -501,7 +506,7 @@ function emitirFactura(){
           /* console.log(JSON.stringify(obj)) */
           $.ajax({
             type:"POST",
-            url:"controlador/facturaControlador.php?ctrRegistrarFactura",
+            url:"controlador/facturaControlador.php?ctrRegFactura",
             data:obj,
             cache:false,
             success:function(data){
@@ -514,7 +519,7 @@ function emitirFactura(){
                 })
                 setTimeout(function(){
                   location.reload()
-                }, 1000)
+                }, 1200)
               }else{
                 Swal.fire({
                   icon:"error",
@@ -540,12 +545,12 @@ function emitirFactura(){
              data: obj,
              success: function(data) {
                  $("#content-xl").html(data);
-             }
-          })
+            }
+         })
         }
         
         /**eliminar factura */
-        function MEliFactura(cuf){
+        function MEliminarFactura(cuf){
           let obj={
             codigoAmbiente:2,
             codigoPuntoVenta:0,
@@ -589,10 +594,10 @@ function emitirFactura(){
                           title:"ERROR",
                           text:"Anulación rechazada",
                           showConfirmButton:false,
-                          timer:1000
+                          timer:1100
                       })
                       }
-                    }
+                    }
                 })
             }
         })
@@ -612,7 +617,7 @@ function emitirFactura(){
                   icon:'success',
                   title:"Factura Anulada ",
                   showConfirmButton:false,
-                  timer:1000
+                  timer:1100
               })
               setTimeout(function(){
                 location.reload()
@@ -623,9 +628,9 @@ function emitirFactura(){
                   title:"ERROR",
                   text:"Error al anular",
                   showConfirmButton:false,
-                  timer:1000
+                  timer:1100
               })
-              }
-            }
-        })
+            }
         }
+    })
+  }
