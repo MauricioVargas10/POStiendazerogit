@@ -129,6 +129,12 @@ class ControladorFactura{
         $respuesta=ModeloFactura::mdlLeyenda();
         echo json_encode($respuesta);
     }
+    static public function ctrCantidadVentas(){
+
+        $respuesta=ModeloFactura::mdlCantidadVentas();
+        return ($respuesta);
+        //echo $respuesta;
+    }
 
   
 }

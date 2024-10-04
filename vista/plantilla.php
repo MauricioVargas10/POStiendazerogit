@@ -10,25 +10,22 @@ session_start();
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="assest/plugins/fontawesome-free/css/all.min.css">
-
-    <!-- SweetAlert2 -->
-  <link rel="stylesheet" href="assest/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-   
-  <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="assest/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  
-    <!-- Theme style -->
-  <link rel="stylesheet" href="assest/dist/css/adminlte.min.css">
-  <link rel="icon" href="assest/dist/img/Logo_POS.png">
-  
   <!-- DataTables -->
   <link rel="stylesheet" href="assest/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="assest/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="assest/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-  
+  <!-- Theme style -->
+  <link rel="stylesheet" href="assest/dist/css/adminlte.min.css">
+  <link rel="icon" href="assest/dist/img/logo_POS.png">
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="assest/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- daterangepicker -->
+  <script src="assest/plugins/moment/moment.min.js"></script>
+  <script src="assest/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- ChartJS -->
+  <script src="assest/plugins/chart.js/Chart.min.js"></script>
 </head>
 <?php 
 

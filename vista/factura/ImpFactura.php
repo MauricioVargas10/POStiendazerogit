@@ -5,11 +5,24 @@ require_once "../../assest/fpdf/fpdf.php";
 $id=$_GET["id"];
 $factura=ControladorFactura::ctrInfoFactura($id);
 $producto=json_decode($factura["detalle"], true);
-?>
+class PDF extends FPDF
+{
+// Pie de página
+function Footer(){
+    global $factura;
+    // Posición: a 1,5 cm del final
+    $this->SetY(-15);
+    // Arial italic 8
+    $this->SetFont('Arial','I',8);
+    // Número de página
+    $this->Cell(0,10, utf8_decode($factura["leyenda"]), 0,0,'C');
+    }
+}
 
-<?php
-$pdf = new FPDF();
+// Creación del objeto de la clase heredada
+$pdf = new PDF();
 $pdf->AddPage();
+
 
 /**encabezado */
 $pdf->SetFont('Arial', 'B', 15);

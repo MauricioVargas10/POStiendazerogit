@@ -78,21 +78,28 @@ $producto=json_decode($factura["detalle"], true);
                         <td><?php echo $value["precioUnitario"]; ?></td>
                         <td><?php echo $value["montoDescuento"]; ?></td>
                         <td><?php echo $value["subTotal"]; ?></td>
-                    </tr>
-                    <?php
-                }
-                ?>
-                <tr>
-                    <td colspan="4"><b>Total</b></td>
-                    <td><?php echo $factura["neto"]; ?></td>
-                </tr>
-            </tbody>
-        </table>
+                        </tr>
+<?php
+}
+?>
+<tr>
+<td colspan="4"><b>Total Neto</b></td>
+<td><?php echo $factura["neto"]; ?></td>
+</tr>
+<tr>
+<td colspan="4"><b>Descuento</b></td>
+<td><?php echo $factura["descuento"]; ?></td>
+</tr>
+<tr>
+<td colspan="4"><b>Total</b></td>
+<td><?php echo $factura["total"]; ?></td>
+</tr>
+</tbody>
+</table>
+        </div>
     </div>
 </div>
 
-</div>
 
-<!-- <div class="modal-footer justify-content-between">
-  <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button> -->
+
 </div>

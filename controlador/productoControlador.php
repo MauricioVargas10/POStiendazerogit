@@ -91,4 +91,11 @@ class ControladorProducto{
         $respuesta=ModeloProducto::mdlBusProducto($codProducto);
         echo json_encode($respuesta);   
     }  
-}
+    static public function ctrCantidadProductos(){
+
+        $respuesta=ModeloProducto::mdlCantidadProductos();
+        return ($respuesta);
+        //echo $respuesta;
+    }
+    
+    }//final////
